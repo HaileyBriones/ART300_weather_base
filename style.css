@@ -1,4 +1,4 @@
-.degree_symbol:not(:empty)::after {
+.degree_symbol:not(:empty)::after{
     content: "°"
 }
 
@@ -6,7 +6,74 @@
     display: none;
 }
 
-#map {
+#map{
 	width: 600px;
     height: 600px;
 }
+.menubar{
+    background-color: rgb(48, 65, 93);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    height: 100px;
+    font-family: 'Oswald', sans-serif;
+}
+.location{
+    font-family: 'Oswald', sans-serif;
+    font-size: 25px;
+    color: white;
+    text-align: center;
+}
+.currentbar{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+.search{
+    text-align: right;
+}
+.date_time{
+    font-family: 'Oswald', sans-serif;
+    color:  rgb(48, 65, 93);
+}
+.lat_long{
+    font-family: 'Oswald', sans-serif;
+    color:  rgb(48, 65, 93);
+    text-align: right;
+}
+.current_temp{
+    font-family: 'Vidaloka', serif;
+    color: rgb(207, 103, 102);
+    font-size: 170px;
+    text-align: center;
+}
+.description_box{
+    background-color: rgb(144, 173, 187);
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    width: 50%;
+    height: 100px;
+}
+.alerts{
+    color: rgb(207, 103, 102);
+}
+.weather_description{
+    font-family: 'Oswald', sans-serif;
+}
+.hourly{
+    background-color: rgb(48, 65, 93);
+    width: 100%;
+    height: 100px;
+    font-family: 'Oswald', sans-serif;
+    color: white;
+}
+.today_high_low{
+    font-family: 'Oswald', sans-serif;
+    color: rgb(207, 103, 102);
+    text-align: center;
+}
+.feels_like{
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+}
+font-family: 'Rozha One', serif;

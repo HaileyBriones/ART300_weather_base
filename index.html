@@ -22,19 +22,88 @@
         <script src="/js/libraries/leaflet/leaflet-openweathermap.js"></script>
         <script src="/js/libraries/leaflet/leaflet-languageselector.js"></script>
 
+        <link href="https://fonts.googleapis.com/css?family=Oswald|Rozha+One|Vidaloka&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/style.css">
     </head>
 
     <body>
 
 
-
-        <input placeholder="Enter Your ZIP Code" name="name" id="zip" />
-        <p id="zip_display"></p>
-
-
         <div class="results" id="app">
-            <h1>TIME</h1>
+            <div class="menubar">
+                <div class="placeholder"></div>
+                <div class="location">
+                    <p>Manhattan,KS</p>
+                </div>
+                <div class="search">
+                    <input placeholder="Enter Your ZIP Code" name="name" id="zip" />
+                    <p id="zip_display"></p>
+                </div>
+
+            </div>
+            <div class="currentbar">
+                <div class="date_time">
+                    <p>5:37 AM | Wednesday, October 16th</p>
+                </div>
+                <div class="lat_long">
+                    <p>Latitude: 39.183609 | Longitude: -96.571671</p>
+                    <p>{{location.coord.lat}}</p>
+                    <p>{{location.coord.lon}}</p>
+                </div>
+            </div>
+            <div class="current_temp">
+                <p>68°</p>
+            </div>
+            <div class="today_high_low">
+                <p>High 79° | Low 48°</p>
+            </div>
+            <div class="feels_like">
+                <p>Feels Like 62°</p>
+            </div>
+            <div class="description_box">
+                <div class="alerts">
+                    <p>Weather Alert: Slight chance of severe thunderstorms in the late evening. </p>
+                </div>
+                <div class="weather_description">
+                    <p>Mostly clear skies with slight wind coming in from the south.</p>
+                </div>
+            </div>
+            <div class="hourly">
+                <div class="hourly_time"></div>
+                <div class="weather_icon"></div>
+                <div class="hourly_temp"></div>
+            </div>
+            <div class="conditions1">
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="uv_index"></div>
+                <div class="visibillity"></div>
+                <div class="cloud_coverage"></div>
+                <div class="dew_point"></div>
+            </div>
+            <div class="weekly_forecast">
+                <div class="day"></div>
+                <div class="weather_icon"></div>
+                <div class="description"></div>
+                <div class="high_low"></div>
+            </div>
+            <div class="radar"></div>
+            <div class="sun_moon">
+                <div class="moon_phase"></div>
+                <div class="sunrise"></div>
+                <div class="sunset"></div>
+            </div>
+            <div class="conditions2">
+                <div class="precipitation"></div>
+                <div class="chance_rain"></div>
+                <div class="snow"></div>
+                <div class="pressure"></div>
+                <div class="air_quality"></div>
+                <div class="pollen"></div>
+            </div>
+            <div class="tide"></div>
+        </div>
+           <!--  <h1>TIME</h1>
             <p>{{time.day}}</p>
             <p>{{time.date}}</p>
             <p>{{time.hour_12}} : {{time.minute}} : {{time.seconds}} {{time.ampm}}</p>
@@ -44,8 +113,7 @@
             <p>{{city}}</p>
 
             <p>{{location.zip}}</p>
-            <p>{{location.coord.lat}}</p>
-            <p>{{location.coord.lon}}</p>
+            
             <p>{{location.name}}</p>
 
             <p>{{error}}</p>
@@ -102,9 +170,7 @@
             <p>{{forecast[0].snow}}</p>
 
             <p>{{forecast[0].dewpt}}</p>
-            <p>{{forecast[0].pres}} mb</p>
-
-        </div>
+            <p>{{forecast[0].pres}} mb</p> -->
         <div id="map"></div>
 
 
