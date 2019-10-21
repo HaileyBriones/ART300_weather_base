@@ -1,0 +1,12 @@
+.degree_symbol:not(:empty)::after {
+    content: "°"
+}
+
+.owm-legend-item{
+    display: none;
+}
+
+#map {
+	width: 600px;
+    height: 600px;
+}
