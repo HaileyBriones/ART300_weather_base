@@ -34,10 +34,12 @@
                 <div class="placeholder"></div>
                 <div class="location">
                     <p>Manhattan,KS</p>
+                    <p>{{city}}</p>
                 </div>
                 <div class="search">
                     <input placeholder="Enter Your ZIP Code" name="name" id="zip" />
                     <p id="zip_display"></p>
+                    <p>{{location.zip}}</p>
                 </div>
 
             </div>
@@ -53,6 +55,7 @@
             </div>
             <div class="current_temp">
                 <p>68°</p>
+                <p class="degree_symbol">{{current.temp.current}}</p>
             </div>
             <div class="today_high_low">
                 <p>High 79° | Low 48°</p>
@@ -69,39 +72,162 @@
                 </div>
             </div>
             <div class="hourly">
-                <div class="hourly_time"></div>
-                <div class="weather_icon"></div>
-                <div class="hourly_temp"></div>
+                <div class="hour 1">
+                    <div class="hourly_time">Now</div>
+                    <div class="weather_icon">
+                        <img class="hourly_icon" src="/weather logo/moon.png"/>
+                    </div>
+                    <div class="hourly_temp">38°</div>
+                </div>
+                <div class="hour 2">
+                    <div class="hourly_time">Now</div>
+                    <div class="weather_icon">
+                        <img class="hourly_icon" src="/weather logo/Partly Cloudy Night.png"/>
+                    </div>
+                    <div class="hourly_temp">38°</div>
+                </div>
+                <div class="hour 3">
+                    <div class="hourly_time">Now</div>
+                    <div class="weather_icon">
+                        <img class="hourly_icon" src="/weather logo/Partly Cloudy Night.png"/>
+                    </div>
+                    <div class="hourly_temp">38°</div>
+                </div>
+                <div class="hour 4">
+                    <div class="hourly_time">Now</div>
+                    <div class="weather_icon">
+                        <img class="hourly_icon" src="/weather logo/Partly Cloudy Day.png"/>
+                    </div>
+                    <div class="hourly_temp">38°</div>
+                </div>
+                <div class="hour 5">
+                    <div class="hourly_time">Now</div>
+                    <div class="weather_icon">
+                        <img class="hourly_icon" src="/weather logo/Partly Cloudy Day.png"/>
+                    </div>
+                    <div class="hourly_temp">38°</div>
+                </div>
+                <div class="hour 6">
+                    <div class="hourly_time">Now</div>
+                    <div class="weather_icon">
+                        <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                    </div>
+                    <div class="hourly_temp">38°</div>
+                </div>
             </div>
-            <div class="conditions1">
-                <div class="humidity"></div>
-                <div class="wind"></div>
-                <div class="uv_index"></div>
-                <div class="visibillity"></div>
-                <div class="cloud_coverage"></div>
-                <div class="dew_point"></div>
+            <div class="grid1">
+                <div class="conditions1">
+                    <div class="humidity">
+                        <div class="title2">Humidity</div>
+                        <div class="content">64%</div>
+                    </div>
+                    <div class="wind">
+                        <div class="title2">Wind</div>
+                        <div class="content">1 mph</div>
+                    </div>
+                    <div class="uv_index">
+                        <div class="title2">UV Index</div>
+                        <div class="content">1</div>
+                    </div>
+                    <div class="visibillity">
+                        <div class="title2">Visibillity</div>
+                        <div class="content">10 mi</div>
+                    </div>
+                    <div class="cloud_coverage">
+                        <div class="title2">Cloud Coverage</div>
+                        <div class="content">Partial</div>
+                    </div>
+                    <div class="dew_point">
+                        <div class="title2">Dew Point</div>
+                        <div class="content">36°</div>
+                    </div>
+                </div>
+                <div class="weekly_forecast">
+                    <div class="title">Weekly Forecast</div>
+                    <div class="day1 day_container">
+                        <div class="day">Monday</div>
+                        <div class="weather_icon">
+                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                            <div class="description">Sunny</div>
+                        </div>
+                        <div class="high_low">65° | 72°</div>
+                    </div>
+                    <div class="day2 day_container">
+                        <div class="day">Tuesday</div>
+                        <div class="weather_icon">
+                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                            <div class="description">Sunny</div>
+                        </div>
+                        <div class="high_low">65° | 72°</div>
+                    </div>
+                    <div class="day3 day_container">
+                        <div class="day">Wednesday</div>
+                        <div class="weather_icon">
+                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                            <div class="description">Sunny</div>
+                        </div>
+                        <div class="high_low">65° | 72°</div>
+                    </div>
+                    <div class="day4 day_container">
+                        <div class="day">Thursday</div>
+                        <div class="weather_icon">
+                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                            <div class="description">Sunny</div>
+                        </div>
+                        
+                        <div class="high_low">65° | 72°</div>
+                    </div>
+                    <div class="day5 day_containers">
+                        <div class="day">Friday</div>
+                        <div class="weather_icon">
+                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                        </div>
+                        <div class="description">Sunny</div>
+                        <div class="high_low">65° | 72°</div>
+                    </div>
+                </div>
             </div>
-            <div class="weekly_forecast">
-                <div class="day"></div>
-                <div class="weather_icon"></div>
-                <div class="description"></div>
-                <div class="high_low"></div>
+            <div class="grid2">
+                <div class="radar">
+                    <div class="title">Weather Radar</div>
+                    <div class="radar_map">(insert box)</div>
+                </div>
+                <div class="sun_moon">
+                    <div class="title">Moon Phase</div>
+                    <div class="moon_phase">Waning Gibus</div>
+                    <div class="sunrise">7:11 am</div>
+                    <div class="sunset">6:19 pm</div>
+                </div>
             </div>
-            <div class="radar"></div>
-            <div class="sun_moon">
-                <div class="moon_phase"></div>
-                <div class="sunrise"></div>
-                <div class="sunset"></div>
+            <div class="grid3">
+                <div class="conditions2">
+                    <div class="precipitation">
+                        <div class="title2">Precipitation</div>
+                        <div class="content">0 in</div>
+                    </div>
+                    <div class="chance_rain">
+                        <div class="title2">Chance of Rain</div>
+                        <div class="content">10%</div>
+                    </div>
+                    <div class="pressure">
+                        <div class="title2">Pressure</div>
+                        <div class="content">30.1 inHg</div>
+                    </div>
+                    <div class="air_quality">
+                        <div class="title2">Air Quality</div>
+                        <div class="content">Good</div>
+                    </div>
+                    <div class="air_quality_index">
+                        <div class="title2">Air Quality Index</div>
+                        <div class="content">44</div>
+                    </div>
+                    <div class="pollen">
+                        <div class="title2">Pollen</div>
+                        <div class="content">36°</div>
+                    </div>
+                </div>
+                <div class="tide">(insert box)</div>
             </div>
-            <div class="conditions2">
-                <div class="precipitation"></div>
-                <div class="chance_rain"></div>
-                <div class="snow"></div>
-                <div class="pressure"></div>
-                <div class="air_quality"></div>
-                <div class="pollen"></div>
-            </div>
-            <div class="tide"></div>
         </div>
            <!--  <h1>TIME</h1>
             <p>{{time.day}}</p>
@@ -124,7 +250,7 @@
             <p>{{current.description_long}}</p>
             <p>{{current.description_icon}}</p>
 
-            <p class="degree_symbol">{{current.temp.current}}</p>
+            
             <p class="degree_symbol">{{current.temp.high}}</p>
             <p class="degree_symbol">{{current.temp.low}}</p>
 
