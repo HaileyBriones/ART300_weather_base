@@ -46,18 +46,30 @@
     color: rgb(207, 103, 102);
     font-size: 170px;
     text-align: center;
-    margin-top: -130px;
-    margin-bottom: -130px;
+    margin-top: -160px;
+    margin-bottom: -170px;
 }
 .description_box{
+    display: grid;
+    grid-template-columns: .5fr 1fr .5fr;
+    width: 100%;
     background-color: rgb(144, 173, 187);
     font-family: 'Oswald', sans-serif;
     text-align: center;
-    width: 50%;
     height: 100px;
+}
+.box1{
+    background-color: white;
+}
+.box2{
+    text-align: center;
+}
+.box3{
+    background-color: white;
 }
 .alerts{
     color: rgb(207, 103, 102);
+    padding-top: 5px;
 }
 .weather_description{
     font-family: 'Oswald', sans-serif;
@@ -71,6 +83,8 @@
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: repeat(10, 1fr);
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 .hourly_time{
     text-align: center;
@@ -98,35 +112,39 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
 }
+.title2{
+    padding: 20px;
+}
 .humidity{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
 }
 .wind{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
 }
 .uv_index{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
 }
 .visibillity{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
 }
 .cloud_coverage{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
 }
 .dew_point{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
+    margin-bottom: 40px;
 }
 .conditions1{
     font-family: 'Vidaloka', serif;
@@ -141,13 +159,15 @@
     background-color: #031424;
     color: white;
     font-family: 'Oswald', sans-serif;
-    
+    margin-bottom: 40px;
 }
 
 .day_container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 2rem;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 .day{
     text-align: left;
@@ -165,20 +185,37 @@
 .grid2{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-gap: 2rem;
 }
 .radar{
     background-color: #031424;
     color: white;
     font-family: 'Oswald', sans-serif;
+    margin-bottom: 40px;
 }
 .sun_moon{
-    background-color: #CF6766;
     color: white;
     font-size: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
+}
+.moon_phase{
+    background-color: #CF6766;  
+    width: 100%;
+    height: 180px;
+}
+.sunrise{
+    background-color:  #CF6766; 
+    width: 100%;
+    height: 120px;
+    margin-bottom: 40px;
+}
+.sunset{
+    background-color:  #CF6766; 
+    width: 100%;
+    height: 120px;
 }
 .grid3{
     display: grid;
@@ -188,32 +225,32 @@
 .precipitation{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
 }
 .chance_rain{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
 }
 .pressure{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
 }
 .air_quality{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
 }
 .air_quality_index{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
 }
 .pollen{
     background-color: rgb(144, 173, 187);
     width: 100%;
-    height: 100px;
+    height: 120px;
 }
 .conditions2{
     font-family: 'Vidaloka', serif;
@@ -228,14 +265,12 @@
     background-color: #031424;
     color: white;
     font-family: 'Oswald', sans-serif;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 2rem;
 }
 .title{
     font-family: 'Oswald', sans-serif;
     font-size: 20px;
     text-align: left;
+    padding: 20px;
 }
 .title2{
     font-family: 'Oswald', sans-serif;
