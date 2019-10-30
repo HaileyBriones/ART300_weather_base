@@ -1,6 +1,7 @@
+// TODO 
+// have students set default zip and fill it to their id 
 
-
-
+console.log("hi");
 let nws; 
 /* ZIP CODE FUNCTIONS */
 let zip = "";
@@ -48,6 +49,7 @@ var weather = {
 			current: "",
 			high: "",
 			low: "",
+			feelslike: "",
 		},
 		wind: {
 			speed: "",
@@ -58,11 +60,12 @@ var weather = {
 		humidity: "",
 		pressure:"",
 		cloud_cover: "",
+		uv: "",
+		air_quality: "",
 
 		parcipitation: {
 			rain: "",
 			snow: "",
-
 		},
 
 		sunrise: "",
@@ -104,10 +107,10 @@ if (getParameterByName('zip')) {
     zip = getParameterByName('zip');
 }
 
-function zipTest(e) {
-    let log = document.getElementById('zip_display');
+function zipTest() {
+	var zipEl =document.getElementById('zip').value;
 
-    var test_zip = e.target.value.replace(/\D/g, '');
+	var test_zip = zipEl.replace(/\D/g, '');
     var regex = /(^\d{5}$)|(^\d{5}-\d{4}$)/g;
     var found = test_zip.match(regex);
 
@@ -117,12 +120,16 @@ function zipTest(e) {
 			zip = found[0];
 			weather.location.zip = zip; 
 			getCurrent(zip);
+			getAltCurrent(zip);
 			getForecast(zip);
         }
-
     }
 }
 
+
+function myzip(){
+	zipTest("myzip");
+}
 
 
 /* WEATHER RETRIEVAL AND PARSING FUNCTIONS */
@@ -137,7 +144,8 @@ function getCurrent(z) {
         .then(function (myJson) {
 			mapCurrentResultsToState(myJson);
 			if(myJson.coord.lat !== undefined && myJson.coord.lon !== undefined){
-				getHourlyForcast( myJson.coord.lat, myJson.coord.lon);
+				getHourlyForcast( myJson.coord.lat, myJson.coord.lon );
+				getCurrentUV( myJson.coord.lat, myJson.coord.lon );
 				destroyMap();
 				my_initMap( myJson.coord.lat, myJson.coord.lon, 9 );
 			}
@@ -148,7 +156,7 @@ function getCurrent(z) {
 
 function mapCurrentResultsToState(j) {
 
-	if (j.cod === "404" || j.cod === "401" ) {
+	if (j.cod == "404" || j.cod == "401" ) {
 		weather.error = j.message;
     } else {
 		weather.location.name = j.name;
@@ -166,9 +174,28 @@ function mapCurrentResultsToState(j) {
 	
 		weather.current.wind.speed = j.wind.speed + "mph";
 		weather.current.wind.degree = j.wind.deg;
-        weather.current.cloud_cover = j.clouds.all;
+		weather.current.cloud_cover = j.clouds.all;
+		
+		var sunrise = new Date(j.sys.sunrise*1000);
+		weather.current.sunrise = formatDate(sunrise, "h:mmtt");
+
+		var sunset = new Date(j.sys.sunset*1000);
+		weather.current.sunset = formatDate(sunset, "h:mmtt");
 	}
 
+}
+
+function getAltCurrent(zip){
+	let toFetchAltCurrent = "https://api.weatherbit.io/v2.0/current?&postal_code="+zip+"&country=US&key="+Keys.weatherbit;
+
+	fetch(toFetchAltCurrent)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+			weather.current.temp.feelslike = celsiusToFahrenheit(myJson.data[0].app_temp);
+			weather.current.air_quality = myJson.data[0].aqi;
+        });
 }
 
 
@@ -188,14 +215,37 @@ function getForecast(z) {
 }
 
 function mapForecastResultsToState(j) {
-	if (j.cod === "404" || j.cod === "401" ) {
+	if (j.cod == "404" || j.cod == "401" ) {
 		weather.error = j.message;
     } else {
-		console.log(j);
 		weather.forecast = [];
 		j.data.forEach(function(element) {
+			element['weekday'] = getDayOfWeek(element.datetime);
+
+			// set icon 
+			if( element.weather.code == '800' ){
+				element['description_icon'] = "01d";
+			}else if( element.weather.code == '801' ){
+				element['description_icon'] = "02d";
+			}else if( element.weather.code == '802' ){
+				element['description_icon'] = "03d";
+			}else if( element.weather.code == '803' || element.weather.code == '804'  ){
+				element['description_icon'] = "04d";
+			}else if( element.weather.code == '300' || element.weather.code == '301' || element.weather.code == '302'  ){
+				element['description_icon'] = "09d";
+			}else if( element.weather.code == '500' || element.weather.code == '501' || element.weather.code == '511' || element.weather.code == '520' || element.weather.code == '521' || element.weather.code == '522' || element.weather.code == '900' ){
+				element['description_icon'] = "10d";
+			}else if( element.weather.code == '200' || element.weather.code == '201' || element.weather.code == '202' || element.weather.code == '230' || element.weather.code == '231' || element.weather.code == '232' || element.weather.code == '233' ){
+				element['description_icon'] = "11d";
+			}else if( element.weather.code == '600' || element.weather.code == '601' || element.weather.code == '602' || element.weather.code == '610' || element.weather.code == '611' || element.weather.code == '612' || element.weather.code == '621' || element.weather.code == '622' || element.weather.code == '623' ){
+				element['description_icon'] = "13d";
+			}else if( element.weather.code == '700' || element.weather.code == '711' || element.weather.code == '721' || element.weather.code == '731' || element.weather.code == '741' || element.weather.code == '751' ){
+				element['description_icon'] = "50d";
+			}
+
 			weather.forecast.push(element);
 			weather.location.state = j.state_code;
+
 		});
     }
 }
@@ -220,8 +270,27 @@ function getHourlyForcast( lat, lon ){
         })
         .then(function(myJson) {
 			weather.hourly = myJson.properties.periods;
-        })
+			weather.hourly.forEach(function(element) {
+				var d = new Date(element.startTime);
+				element['time'] = formatDate(d, "h:mmtt");
+			  });
+
+		})
+		  
     });
+}
+
+
+function getCurrentUV( lat, lon ){
+	let toFetch = "http://api.openweathermap.org/data/2.5/uvi?appid=" + Keys.openweathermap + "&lat=" + lat + "&lon=" + lon;
+
+	fetch(toFetch)
+    .then(function(response) {
+		return response.json();
+    })
+    .then(function(myJson) {
+        weather.current.uv = myJson.value;
+    })
 }
 
 
@@ -241,12 +310,6 @@ function destroyMap(){
 
 
 
-
-/* VUE DATA BINDING */
-var vm = new Vue({
-	el: '#app',
-	data: weather
-})
 
 
 
@@ -304,7 +367,98 @@ function kelvinToFahrenheit(tempK) {
     return tempF;
 }
 
+function celsiusToFahrenheit(tempC) {
+	let tempF = parseInt((tempC * 1.8) + 32);
+	return tempF;
+}
 
+function getDayOfWeek(date) {
+	var dayOfWeek = new Date(date).getDay();    
+	return isNaN(dayOfWeek) ? null : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dayOfWeek];
+  }
+
+function formatDate(date, format, utc) {
+    var MMMM = ["\x00", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var MMM = ["\x01", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var dddd = ["\x02", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var ddd = ["\x03", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    function ii(i, len) {
+        var s = i + "";
+        len = len || 2;
+        while (s.length < len) s = "0" + s;
+        return s;
+    }
+
+    var y = utc ? date.getUTCFullYear() : date.getFullYear();
+    format = format.replace(/(^|[^\\])yyyy+/g, "$1" + y);
+    format = format.replace(/(^|[^\\])yy/g, "$1" + y.toString().substr(2, 2));
+    format = format.replace(/(^|[^\\])y/g, "$1" + y);
+
+    var M = (utc ? date.getUTCMonth() : date.getMonth()) + 1;
+    format = format.replace(/(^|[^\\])MMMM+/g, "$1" + MMMM[0]);
+    format = format.replace(/(^|[^\\])MMM/g, "$1" + MMM[0]);
+    format = format.replace(/(^|[^\\])MM/g, "$1" + ii(M));
+    format = format.replace(/(^|[^\\])M/g, "$1" + M);
+
+    var d = utc ? date.getUTCDate() : date.getDate();
+    format = format.replace(/(^|[^\\])dddd+/g, "$1" + dddd[0]);
+    format = format.replace(/(^|[^\\])ddd/g, "$1" + ddd[0]);
+    format = format.replace(/(^|[^\\])dd/g, "$1" + ii(d));
+    format = format.replace(/(^|[^\\])d/g, "$1" + d);
+
+    var H = utc ? date.getUTCHours() : date.getHours();
+    format = format.replace(/(^|[^\\])HH+/g, "$1" + ii(H));
+    format = format.replace(/(^|[^\\])H/g, "$1" + H);
+
+    var h = H > 12 ? H - 12 : H == 0 ? 12 : H;
+    format = format.replace(/(^|[^\\])hh+/g, "$1" + ii(h));
+    format = format.replace(/(^|[^\\])h/g, "$1" + h);
+
+    var m = utc ? date.getUTCMinutes() : date.getMinutes();
+    format = format.replace(/(^|[^\\])mm+/g, "$1" + ii(m));
+    format = format.replace(/(^|[^\\])m/g, "$1" + m);
+
+    var s = utc ? date.getUTCSeconds() : date.getSeconds();
+    format = format.replace(/(^|[^\\])ss+/g, "$1" + ii(s));
+    format = format.replace(/(^|[^\\])s/g, "$1" + s);
+
+    var f = utc ? date.getUTCMilliseconds() : date.getMilliseconds();
+    format = format.replace(/(^|[^\\])fff+/g, "$1" + ii(f, 3));
+    f = Math.round(f / 10);
+    format = format.replace(/(^|[^\\])ff/g, "$1" + ii(f));
+    f = Math.round(f / 10);
+    format = format.replace(/(^|[^\\])f/g, "$1" + f);
+
+    var T = H < 12 ? "AM" : "PM";
+    format = format.replace(/(^|[^\\])TT+/g, "$1" + T);
+    format = format.replace(/(^|[^\\])T/g, "$1" + T.charAt(0));
+
+    var t = T.toLowerCase();
+    format = format.replace(/(^|[^\\])tt+/g, "$1" + t);
+    format = format.replace(/(^|[^\\])t/g, "$1" + t.charAt(0));
+
+    var tz = -date.getTimezoneOffset();
+    var K = utc || !tz ? "Z" : tz > 0 ? "+" : "-";
+    if (!utc) {
+        tz = Math.abs(tz);
+        var tzHrs = Math.floor(tz / 60);
+        var tzMin = tz % 60;
+        K += ii(tzHrs) + ":" + ii(tzMin);
+    }
+    format = format.replace(/(^|[^\\])K/g, "$1" + K);
+
+    var day = (utc ? date.getUTCDay() : date.getDay()) + 1;
+    format = format.replace(new RegExp(dddd[0], "g"), dddd[day]);
+    format = format.replace(new RegExp(ddd[0], "g"), ddd[day]);
+
+    format = format.replace(new RegExp(MMMM[0], "g"), MMMM[M]);
+    format = format.replace(new RegExp(MMM[0], "g"), MMM[M]);
+
+    format = format.replace(/\\(.)/g, "$1");
+
+    return format;
+}
 
 
 
@@ -751,3 +905,17 @@ function my_initMap( l1, l2, z1 ) {
  * END
  * MAP INITIALIZE
  */
+
+
+
+
+  /* VUE DATA BINDING */
+var vm = new Vue({
+	el: '#app',
+	data: weather,
+	methods: {
+		zip_trigger: function (){
+			myzip();
+		}
+	}
+})

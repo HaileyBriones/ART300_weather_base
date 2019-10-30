@@ -33,38 +33,36 @@
             <div class="menubar">
                 <div class="placeholder"></div>
                 <div class="location">
-                    <p>Manhattan,KS</p>
-                    <p>{{city}}, {{location.name}}</p>
+                    <p>{{city}}, {{location.state}}</p>
                 </div>
                 <div class="search">
-                    <input placeholder="Enter Your ZIP Code" name="name" id="zip" />
+                    <input placeholder="Enter Your ZIP Code" v-on:input="zip_trigger" name="name" id="zip" />
                     <p id="zip_display"></p>
                     <p>{{location.zip}}</p>
                 </div>
             </div>
             <div class="currentbar">
                 <div class="date_time">
-                    <p>{{time.hour_12}}:{{time.minute}}:{{time.seconds}} {{time.ampm}} | {{time.day}}, {{time.date}}</p>
+                    <p>{{time.hour_12}}:{{time.minute}} {{time.ampm}} | {{time.day}}, {{time.date}}</p>
                 </div>
                 <div class="lat_long">
                     <p>Latitude: {{location.coord.lat}} | Longitude: {{location.coord.lon}}</p>
                 </div>
             </div>
             <div class="current_temp">
-                <p>68°</p>
                 <p class="degree_symbol">{{current.temp.current}}</p>
             </div>
             <div class="today_high_low">
                 <p>High {{current.temp.high}}° | Low {{current.temp.low}}°</p>
             </div>
             <div class="feels_like">
-                <p>Feels Like 62°</p>
+                <p>Feels Like {{current.temp.feelslike}}°</p>
             </div>
             <div class="description_box">
                 <div class="box1"></div>
                 <div class="box2">
                     <div class="alerts">
-                        <p>Weather Alert: Slight chance of severe thunderstorms in the late evening. </p>
+                        <p>Weather Alert: {{error}}</p>
                     </div>
                     <div class="weather_description">
                         <p>Weather Description: {{current.description_main}}</p>
@@ -74,97 +72,98 @@
             </div>
             <div class="hourly">
                 <div class="hour 1">
-                    <div class="hourly_time">Now</div>
-                    <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/moon.png"/>
+                    <div class="hourly_time">{{hourly[0].time}}</div>
+                    <div class="weather_icon icon-01d">
+                        <!-- <img class="hourly_icon" src="/weather logo/moon.png"/> -->
                     </div>
                     <div class="hourly_temp">{{hourly[0].temperature}}°</div>
                 </div>
                 <div class="hour 2">
-                    <div class="hourly_time">Now</div>
-                    <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/Partly Cloudy Night.png"/>
+                    <div class="hourly_time">{{hourly[1].time}}</div>
+                    <div class="weather_icon icon-13d">
+                        <img v-bind:src= "'/weatherlogo/'+forecast[2].description_icon+'.png'" v-bing:alt= "forecast[2].weather.description">
+                        <!--<img class="hourly_icon" src="/weather logo/01n.png"/>-->
                     </div>
-                    <div class="hourly_temp">{{hourly[0].temperature}}°</div>
+                    <div class="hourly_temp">{{hourly[1].temperature}}°</div>
                 </div>
                 <div class="hour 3">
-                    <div class="hourly_time">Now</div>
+                    <div class="hourly_time">{{hourly[2].time}}</div>
                     <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/Partly Cloudy Night.png"/>
+                        <img class="hourly_icon" src="/weather logo/02n.png"/>
                     </div>
-                    <div class="hourly_temp">{{hourly[0].temperature}}°</div>
+                    <div class="hourly_temp">{{hourly[2].temperature}}°</div>
                 </div>
                 <div class="hour 4">
-                    <div class="hourly_time">Now</div>
+                    <div class="hourly_time">{{hourly[3].time}}</div>
                     <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/Partly Cloudy Day.png"/>
+                        <img class="hourly_icon" src="/weather logo/02d.png"/>
                     </div>
-                    <div class="hourly_temp">{{hourly[0].temperature}}°</div>
+                    <div class="hourly_temp">{{hourly[3].temperature}}°</div>
                 </div>
                 <div class="hour 5">
-                    <div class="hourly_time">Now</div>
+                    <div class="hourly_time">{{hourly[4].time}}</div>
                     <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/Partly Cloudy Day.png"/>
+                        <img class="hourly_icon" src="/weather logo/02d.png"/>
                     </div>
-                    <div class="hourly_temp">{{hourly[0].temperature}}°</div>
+                    <div class="hourly_temp">{{hourly[4].temperature}}°</div>
                 </div>
                 <div class="hour 6">
-                    <div class="hourly_time">Now</div>
+                    <div class="hourly_time">{{hourly[5].time}}</div>
                     <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                        <img class="hourly_icon" src="/weather logo/01d.png"/>
                     </div>
-                    <div class="hourly_temp">{{hourly[0].temperature}}°</div>
+                    <div class="hourly_temp">{{hourly[5].temperature}}°</div>
                 </div>
                 <div class="hour 7">
-                    <div class="hourly_time">Now</div>
+                    <div class="hourly_time">{{hourly[6].time}}</div>
                     <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                        <img class="hourly_icon" src="/weather logo/09n.png"/>
                     </div>
-                    <div class="hourly_temp">{{hourly[0].temperature}}°</div>
+                    <div class="hourly_temp">{{hourly[6].temperature}}°</div>
                 </div>
                 <div class="hour 8">
-                    <div class="hourly_time">Now</div>
+                    <div class="hourly_time">{{hourly[7].time}}</div>
                     <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                        <img class="hourly_icon" src="/weather logo/01d.png"/>
                     </div>
-                    <div class="hourly_temp">{{hourly[0].temperature}}°</div>
+                    <div class="hourly_temp">{{hourly[7].temperature}}°</div>
                 </div>
                 <div class="hour 9">
-                    <div class="hourly_time">Now</div>
+                    <div class="hourly_time">{{hourly[8].time}}</div>
                     <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                        <img class="hourly_icon" src="/weather logo/01d.png"/>
                     </div>
-                    <div class="hourly_temp">{{hourly[0].temperature}}°</div>
+                    <div class="hourly_temp">{{hourly[8].temperature}}°</div>
                 </div>
                 <div class="hour 10">
-                    <div class="hourly_time">Now</div>
+                    <div class="hourly_time">{{hourly[9].time}}</div>
                     <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                        <img class="hourly_icon" src="/weather logo/01d.png"/>
                     </div>
-                    <div class="hourly_temp">{{hourly[0].temperature}}°</div>
+                    <div class="hourly_temp">{{hourly[9].temperature}}°</div>
                 </div>
             </div>
             <div class="grid1">
                 <div class="conditions1">
                     <div class="humidity">
                         <div class="title2">Humidity</div>
-                        <div class="content">64%</div>
+                        <div class="content">{{current.humidity}}%</div>
                     </div>
                     <div class="wind">
-                        <div class="title2">Wind</div>
-                        <div class="content">{{hourly[0].windSpeed}}mph</div>
+                        <div class="title2">Wind Speed</div>
+                        <div class="content">{{current.wind.speed}}</div>
                     </div>
                     <div class="uv_index">
                         <div class="title2">UV Index</div>
-                        <div class="content">{{forecast[0].uv}}</div>
+                        <div class="content">{{current.uv}}</div>
                     </div>
                     <div class="visibillity">
                         <div class="title2">Visibillity</div>
-                        <div class="content">{{forecast[0].vis}}mi</div>
+                        <div class="content">{{forecast[0].vis}} mi</div>
                     </div>
                     <div class="cloud_coverage">
                         <div class="title2">Cloud Coverage</div>
-                        <div class="content">{{current.cloud_cover}}</div>
+                        <div class="content">{{current.cloud_cover}}%</div>
                     </div>
                     <div class="dew_point">
                         <div class="title2">Dew Point</div>
@@ -175,95 +174,84 @@
                     <div class="title">Weekly Forecast</div>
                     <div class="placeholder"></div>
                     <div class="day1 day_container">
-                        <div class="day">Monday</div>
-                        <div class="weather_icon">
-                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                        <div class="day">{{forecast[0].weekday}}</div>
+                        <div class="weather_icon2">
+                            <img v-bind:src= "'/img/'+forecast[0].description_icon+'.png'" v-bing:alt= "forecast[0].weather.description">
+                            <!--<img class="hourly_icon" src="/weather logo/01d.png"/>-->
                             <div class="description">{{forecast[0].weather.description}}</div>
                         </div>
                         <div class="high_low">{{forecast[0].min_temp}}° | {{forecast[0].max_temp}}°</div>
                     </div>
                     <div class="day2 day_container">
-                        <div class="day">Tuesday</div>
-                        <div class="weather_icon">
-                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
-                            <div class="description">{{forecast[0].weather.description}}</div>
+                        <div class="day">{{forecast[1].weekday}}</div>
+                        <div class="weather_icon2">
+                            <img class="hourly_icon" src="/weather logo/02n.png"/>
+                            <div class="description">{{forecast[1].weather.description}}</div>
                         </div>
-                        <div class="high_low">{{forecast[0].min_temp}}° | {{forecast[0].max_temp}}°</div>
+                        <div class="high_low">{{forecast[1].min_temp}}° | {{forecast[1].max_temp}}°</div>
                     </div>
                     <div class="day3 day_container">
-                        <div class="day">Wednesday</div>
-                        <div class="weather_icon">
-                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
-                            <div class="description">{{forecast[0].weather.description}}</div>
+                        <div class="day">{{forecast[2].weekday}}</div>
+                        <div class="weather_icon2">
+                            <img class="hourly_icon" src="/weather logo/09n.png"/>
+                            <div class="description">{{forecast[2].weather.description}}</div>
                         </div>
-                        <div class="high_low">{{forecast[0].min_temp}}° | {{forecast[0].max_temp}}°</div>
+                        <div class="high_low">{{forecast[2].min_temp}}° | {{forecast[2].max_temp}}°</div>
                     </div>
                     <div class="day4 day_container">
-                        <div class="day">Thursday</div>
-                        <div class="weather_icon">
-                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
-                            <div class="description">{{forecast[0].weather.description}}</div>
+                        <div class="day">{{forecast[3].weekday}}</div>
+                        <div class="weather_icon2">
+                            <img class="hourly_icon" src="/weather logo/01d.png"/>
+                            <div class="description">{{forecast[3].weather.description}}</div>
                         </div>
-                        <div class="high_low">{{forecast[0].min_temp}}° | {{forecast[0].max_temp}}°</div>
+                        <div class="high_low">{{forecast[3].min_temp}}° | {{forecast[3].max_temp}}°</div>
                     </div>
                     <div class="day5 day_container">
-                        <div class="day">Friday</div>
-                        <div class="weather_icon">
-                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
-                            <div class="description">{{forecast[0].weather.description}}</div>
+                        <div class="day">{{forecast[4].weekday}}</div>
+                        <div class="weather_icon2">
+                            <img class="hourly_icon" src="/weather logo/01d.png"/>
+                            <div class="description">{{forecast[4].weather.description}}</div>
                         </div>
-                        <div class="high_low">{{forecast[0].min_temp}}° | {{forecast[0].max_temp}}°</div>
+                        <div class="high_low">{{forecast[4].min_temp}}° | {{forecast[4].max_temp}}°</div>
                     </div>
-                    <div class="day1 day_container">
-                        <div class="day">Saturday</div>
-                        <div class="weather_icon">
-                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
-                            <div class="description">{{forecast[0].weather.description}}</div>
+                    <div class="day6 day_container">
+                        <div class="day">{{forecast[5].weekday}}</div>
+                        <div class="weather_icon2">
+                            <img class="hourly_icon" src="/weather logo/01d.png"/>
+                            <div class="description">{{forecast[5].weather.description}}</div>
                         </div>
-                        <div class="high_low">{{forecast[0].min_temp}}° | {{forecast[0].max_temp}}°</div>
+                        <div class="high_low">{{forecast[5].min_temp}}° | {{forecast[5].max_temp}}°</div>
                     </div>
-                    <div class="day2 day_container">
-                        <div class="day">Sunday</div>
-                        <div class="weather_icon">
-                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
+                    <div class="day7 day_container">
+                        <div class="day">{{forecast[6].weekday}}</div>
+                        <div class="weather_icon2">
+                            <img class="hourly_icon" src="/weather logo/01d.png"/>
                             <div class="description">{{forecast[0].weather.description}}</div>
                         </div>
-                        <div class="high_low">{{forecast[0].min_temp}}° | {{forecast[0].max_temp}}°</div>
-                    </div>
-                    <div class="day3 day_container">
-                        <div class="day">Monday</div>
-                        <div class="weather_icon">
-                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
-                            <div class="description">{{forecast[0].weather.description}}</div>
-                        </div>
-                        <div class="high_low">{{forecast[0].min_temp}}° | {{forecast[0].max_temp}}°</div>
-                    </div>
-                    <div class="day4 day_container">
-                        <div class="day">Tuesday</div>
-                        <div class="weather_icon">
-                            <img class="hourly_icon" src="/weather logo/Sun.png"/>
-                            <div class="description">{{forecast[0].weather.description}}</div>
-                        </div>
-                        <div class="high_low">{{forecast[0].min_temp}}° | {{forecast[0].max_temp}}°</div>
+                        <div class="high_low">{{forecast[6].min_temp}}° | {{forecast[0].max_temp}}°</div>
                     </div>
                 </div>
             </div>
             <div class="grid2">
                 <div class="radar">
                     <div class="title">Weather Radar</div>
+                    <div id="map"></div>
                 </div>
                 <div class="sun_moon">
                     <div class="moon_phase">
                         <div class="title2">Moon Phase</div>
+                        <div class="moon_icon"></div>
+                        <div class="moon_condition">Waning Gibus</div>
                     </div>
                     <div class="moon_phase"></div>
                     <div class="sunrise">
                         <div class="title2">Sunrise</div>
-                        <p>{{current.sunrise}}</p>
+                        <div class="content">{{current.sunrise}}</div>
+                        <p></p>
                     </div>
                     <div class="sunset">
                         <div class="title2">Sunset</div>
-                        <p>{{current.sunset}}</p>
+                        <div class="content">{{current.sunset}}</div>
                     </div>
                 </div>
             </div>
@@ -271,8 +259,11 @@
                 <div class="conditions2">
                     <div class="precipitation">
                         <div class="title2">Precipitation</div>
-                        <div class="content">{{forecast[0].precip}}</div>
-                        <div class="content">{{forecast[0].snow}}</div>
+                        <div class="content">{{forecast[0].precip}} in</div>
+                    </div>
+                    <div class="air_quality">
+                        <div class="title2">Snow Precipitation</div>
+                        <div class="content">{{forecast[0].snow}} in</div>
                     </div>
                     <div class="chance_rain">
                         <div class="title2">Chance of Rain</div>
@@ -280,19 +271,15 @@
                     </div>
                     <div class="pressure">
                         <div class="title2">Pressure</div>
-                        <div class="content">30.1 inHg</div>
-                    </div>
-                    <div class="air_quality">
-                        <div class="title2">Air Quality</div>
-                        <div class="content">Good</div>
+                        <div class="content">{{current.pressure}} inHg</div>
                     </div>
                     <div class="air_quality_index">
                         <div class="title2">Air Quality Index</div>
-                        <div class="content">44</div>
+                        <div class="content">{{current.air_quality}}</div>
                     </div>
                     <div class="pollen">
                         <div class="title2">Pollen</div>
-                        <div class="content">36°</div>
+                        <div class="content">Mild</div>
                     </div>
                 </div>
                 <div class="tide">
@@ -301,6 +288,6 @@
             </div>
         </div>
 
-        <script src="/js/script.js" type="module"></script>
+        <script src="/js/script.js"></script>
     </body>
 </html>

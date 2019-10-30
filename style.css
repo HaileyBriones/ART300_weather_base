@@ -7,8 +7,8 @@
 }
 
 #map{
-	width: 600px;
-    height: 600px;
+	width: 400px;
+    height: 300px;
 }
 .menubar{
     background-color: rgb(48, 65, 93);
@@ -17,6 +17,9 @@
     width: 100%;
     height: 100px;
     font-family: 'Oswald', sans-serif;
+}
+.search{
+    padding: 10px;
 }
 .location{
     font-family: 'Oswald', sans-serif;
@@ -77,11 +80,9 @@
 .hourly{
     background-color: rgb(48, 65, 93);
     width: 100%;
-    height: 100px;
     font-family: 'Oswald', sans-serif;
     color: white;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: repeat(10, 1fr);
     margin-top: 40px;
     margin-bottom: 40px;
@@ -91,6 +92,9 @@
     padding: 5px;
 }
 .weather_icon{
+ text-align: center;
+}
+.weather_icon2{
     text-align: center;
 }
 .hourly_temp{
@@ -161,7 +165,6 @@
     font-family: 'Oswald', sans-serif;
     margin-bottom: 40px;
 }
-
 .day_container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -171,9 +174,6 @@
 }
 .day{
     text-align: left;
-}
-.weather_icon{
-    float:right;
 }
 .description{
     
@@ -185,7 +185,6 @@
 .grid2{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     grid-gap: 2rem;
 }
 .radar{
@@ -276,4 +275,12 @@
     font-family: 'Oswald', sans-serif;
     font-size: 15px;
     text-align: left;
+}
+.icon-01d{
+    background-image: url("/Weather\ Logo/01d.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
 }
