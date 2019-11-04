@@ -128,15 +128,15 @@
                 </div>
                 <div class="hour 9">
                     <div class="hourly_time">{{hourly[8].time}}</div>
-                    <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/01d.png"/>
+                    <div class="weather_icon ">
+                        <img v-bind:src= "'/weatherlogo/'+forecast[0].description_icon+'.png'" v-bing:alt= "forecast[0].weather.description">
                     </div>
                     <div class="hourly_temp">{{hourly[8].temperature}}°</div>
                 </div>
                 <div class="hour 10">
                     <div class="hourly_time">{{hourly[9].time}}</div>
-                    <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/01d.png"/>
+                    <div class="weather_icon ">
+                        <img v-bind:src= "'/weatherlogo/'+forecast[6].description_icon+'.png'" v-bing:alt= "forecast[6].weather.description">
                     </div>
                     <div class="hourly_temp">{{hourly[9].temperature}}°</div>
                 </div>
@@ -174,7 +174,7 @@
                     <div class="day1 day_container">
                         <div class="day">{{forecast[0].weekday}}</div>
                         <div class="weather_icon2">
-                            <img v-bind:src= "'/img/'+forecast[0].description_icon+'.png'" v-bing:alt= "forecast[0].weather.description">
+                            <img v-bind:src= "'/weatherlogo/'+forecast[0].description_icon+'.png'" v-bing:alt= "forecast[0].weather.description">
                             <div class="description">{{forecast[0].weather.description}}</div>
                         </div>
                         <div class="high_low">{{forecast[0].min_temp}}° | {{forecast[0].max_temp}}°</div>
@@ -182,7 +182,7 @@
                     <div class="day2 day_container">
                         <div class="day">{{forecast[1].weekday}}</div>
                         <div class="weather_icon2">
-                            <img class="hourly_icon" src="/weather logo/02n.png"/>
+                            <img v-bind:src= "'/weatherlogo/'+forecast[1].description_icon+'.png'" v-bing:alt= "forecast[1].weather.description">
                             <div class="description">{{forecast[1].weather.description}}</div>
                         </div>
                         <div class="high_low">{{forecast[1].min_temp}}° | {{forecast[1].max_temp}}°</div>
@@ -190,7 +190,7 @@
                     <div class="day3 day_container">
                         <div class="day">{{forecast[2].weekday}}</div>
                         <div class="weather_icon2">
-                            <img class="hourly_icon" src="/weather logo/09n.png"/>
+                            <img v-bind:src= "'/weatherlogo/'+forecast[2].description_icon+'.png'" v-bing:alt= "forecast[2].weather.description">
                             <div class="description">{{forecast[2].weather.description}}</div>
                         </div>
                         <div class="high_low">{{forecast[2].min_temp}}° | {{forecast[2].max_temp}}°</div>
@@ -198,7 +198,7 @@
                     <div class="day4 day_container">
                         <div class="day">{{forecast[3].weekday}}</div>
                         <div class="weather_icon2">
-                            <img class="hourly_icon" src="/weather logo/01d.png"/>
+                            <img v-bind:src= "'/weatherlogo/'+forecast[3].description_icon+'.png'" v-bing:alt= "forecast[3].weather.description">
                             <div class="description">{{forecast[3].weather.description}}</div>
                         </div>
                         <div class="high_low">{{forecast[3].min_temp}}° | {{forecast[3].max_temp}}°</div>
@@ -206,7 +206,7 @@
                     <div class="day5 day_container">
                         <div class="day">{{forecast[4].weekday}}</div>
                         <div class="weather_icon2">
-                            <img class="hourly_icon" src="/weather logo/01d.png"/>
+                            <img v-bind:src= "'/weatherlogo/'+forecast[4].description_icon+'.png'" v-bing:alt= "forecast[4].weather.description">
                             <div class="description">{{forecast[4].weather.description}}</div>
                         </div>
                         <div class="high_low">{{forecast[4].min_temp}}° | {{forecast[4].max_temp}}°</div>
@@ -214,7 +214,7 @@
                     <div class="day6 day_container">
                         <div class="day">{{forecast[5].weekday}}</div>
                         <div class="weather_icon2">
-                            <img class="hourly_icon" src="/weather logo/01d.png"/>
+                            <img v-bind:src= "'/weatherlogo/'+forecast[5].description_icon+'.png'" v-bing:alt= "forecast[5].weather.description">
                             <div class="description">{{forecast[5].weather.description}}</div>
                         </div>
                         <div class="high_low">{{forecast[5].min_temp}}° | {{forecast[5].max_temp}}°</div>
@@ -222,10 +222,10 @@
                     <div class="day7 day_container">
                         <div class="day">{{forecast[6].weekday}}</div>
                         <div class="weather_icon2">
-                            <img class="hourly_icon" src="/weather logo/01d.png"/>
-                            <div class="description">{{forecast[0].weather.description}}</div>
+                            <img v-bind:src= "'/weatherlogo/'+forecast[6].description_icon+'.png'" v-bing:alt= "forecast[6].weather.description">
+                            <div class="description">{{forecast[6].weather.description}}</div>
                         </div>
-                        <div class="high_low">{{forecast[6].min_temp}}° | {{forecast[0].max_temp}}°</div>
+                        <div class="high_low">{{forecast[6].min_temp}}° | {{forecast[6].max_temp}}°</div>
                     </div>
                 </div>
             </div>
@@ -239,9 +239,6 @@
                         <div class="title2">Moon Phase</div>
                         <div class="moon_icon"></div>
                         <div class="content">{{time.moom}}</div>
-                        <div class="new-moon">
-                            <div v-bind:class="forecast[0].description_icon"></div>
-                        </div>
                     </div>
                     <div class="sunrise">
                         <div class="title2">Sunrise</div>
@@ -282,7 +279,7 @@
                     </div>
                 </div>
                 <div class="tide">
-                    <div class="title">Wave Height</div>
+                    <div class="title">Tide Radar</div>
                     <div id="map"></div>
                 </div>
             </div>
