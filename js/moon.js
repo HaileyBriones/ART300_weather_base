@@ -21,28 +21,28 @@ const Moon = {
 
         switch (b) {
         case 0:
-            return 'new-moon';
+            return 'New-Moon';
             break;
         case 1:
-            return 'waxing-crescent-moon';
+            return 'Waxing-Crescent-Moon';
             break;
         case 2:
-            return 'quarter-moon';
+            return 'Quarter-Moon';
             break;
         case 3:
-            return 'waxing-gibbous-moon';
+            return 'Waxing-Gibbous-Moon';
             break;
         case 4:
-            return 'full-moon';
+            return 'Full-Moon';
             break;
         case 5:
-            return 'waning-gibbous-moon';
+            return 'Waning-Gibbous-Moon';
             break;
         case 6:
             return 'last-quarter-moon';
             break;
         case 7:
-            return 'waning-crescent-moon';
+            return 'Waning-Crescent-Moon';
             break;
         }
     }

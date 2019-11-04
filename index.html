@@ -37,7 +37,6 @@
                 </div>
                 <div class="search">
                     <input placeholder="Enter Your ZIP Code" v-on:input="zip_trigger" name="name" id="zip" />
-                    <p id="zip_display"></p>
                     <p>{{location.zip}}</p>
                 </div>
             </div>
@@ -73,58 +72,57 @@
             <div class="hourly">
                 <div class="hour 1">
                     <div class="hourly_time">{{hourly[0].time}}</div>
-                    <div class="weather_icon icon-01d">
-                        <!-- <img class="hourly_icon" src="/weather logo/moon.png"/> -->
+                    <div class="weather_icon ">
+                        <img v-bind:src= "'/weatherlogo/'+forecast[0].description_icon+'.png'" v-bing:alt= "forecast[0].weather.description">
                     </div>
                     <div class="hourly_temp">{{hourly[0].temperature}}°</div>
                 </div>
                 <div class="hour 2">
                     <div class="hourly_time">{{hourly[1].time}}</div>
-                    <div class="weather_icon icon-13d">
-                        <img v-bind:src= "'/weatherlogo/'+forecast[2].description_icon+'.png'" v-bing:alt= "forecast[2].weather.description">
-                        <!--<img class="hourly_icon" src="/weather logo/01n.png"/>-->
+                    <div class="weather_icon ">
+                        <img v-bind:src= "'/weatherlogo/'+forecast[1].description_icon+'.png'" v-bing:alt= "forecast[1].weather.description">
                     </div>
                     <div class="hourly_temp">{{hourly[1].temperature}}°</div>
                 </div>
                 <div class="hour 3">
                     <div class="hourly_time">{{hourly[2].time}}</div>
-                    <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/02n.png"/>
+                    <div class="weather_icon ">
+                        <img v-bind:src= "'/weatherlogo/'+forecast[2].description_icon+'.png'" v-bing:alt= "forecast[2].weather.description">
                     </div>
                     <div class="hourly_temp">{{hourly[2].temperature}}°</div>
                 </div>
                 <div class="hour 4">
                     <div class="hourly_time">{{hourly[3].time}}</div>
-                    <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/02d.png"/>
+                    <div class="weather_icon ">
+                        <img v-bind:src= "'/weatherlogo/'+forecast[3].description_icon+'.png'" v-bing:alt= "forecast[3].weather.description">
                     </div>
                     <div class="hourly_temp">{{hourly[3].temperature}}°</div>
                 </div>
                 <div class="hour 5">
                     <div class="hourly_time">{{hourly[4].time}}</div>
-                    <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/02d.png"/>
+                    <div class="weather_icon ">
+                        <img v-bind:src= "'/weatherlogo/'+forecast[4].description_icon+'.png'" v-bing:alt= "forecast[4].weather.description">
                     </div>
                     <div class="hourly_temp">{{hourly[4].temperature}}°</div>
                 </div>
                 <div class="hour 6">
                     <div class="hourly_time">{{hourly[5].time}}</div>
-                    <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/01d.png"/>
+                    <div class="weather_icon ">
+                        <img v-bind:src= "'/weatherlogo/'+forecast[5].description_icon+'.png'" v-bing:alt= "forecast[5].weather.description">
                     </div>
                     <div class="hourly_temp">{{hourly[5].temperature}}°</div>
                 </div>
                 <div class="hour 7">
                     <div class="hourly_time">{{hourly[6].time}}</div>
-                    <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/09n.png"/>
+                    <div class="weather_icon ">
+                        <img v-bind:src= "'/weatherlogo/'+forecast[6].description_icon+'.png'" v-bing:alt= "forecast[6].weather.description">
                     </div>
                     <div class="hourly_temp">{{hourly[6].temperature}}°</div>
                 </div>
                 <div class="hour 8">
                     <div class="hourly_time">{{hourly[7].time}}</div>
-                    <div class="weather_icon">
-                        <img class="hourly_icon" src="/weather logo/01d.png"/>
+                    <div class="weather_icon ">
+                        <img v-bind:src= "'/weatherlogo/'+forecast[0].description_icon+'.png'" v-bing:alt= "forecast[0].weather.description">
                     </div>
                     <div class="hourly_temp">{{hourly[7].temperature}}°</div>
                 </div>
@@ -177,7 +175,6 @@
                         <div class="day">{{forecast[0].weekday}}</div>
                         <div class="weather_icon2">
                             <img v-bind:src= "'/img/'+forecast[0].description_icon+'.png'" v-bing:alt= "forecast[0].weather.description">
-                            <!--<img class="hourly_icon" src="/weather logo/01d.png"/>-->
                             <div class="description">{{forecast[0].weather.description}}</div>
                         </div>
                         <div class="high_low">{{forecast[0].min_temp}}° | {{forecast[0].max_temp}}°</div>
@@ -241,9 +238,11 @@
                     <div class="moon_phase">
                         <div class="title2">Moon Phase</div>
                         <div class="moon_icon"></div>
-                        <div class="moon_condition">Waning Gibus</div>
+                        <div class="content">{{time.moom}}</div>
+                        <div class="new-moon">
+                            <div v-bind:class="forecast[0].description_icon"></div>
+                        </div>
                     </div>
-                    <div class="moon_phase"></div>
                     <div class="sunrise">
                         <div class="title2">Sunrise</div>
                         <div class="content">{{current.sunrise}}</div>
@@ -267,7 +266,7 @@
                     </div>
                     <div class="chance_rain">
                         <div class="title2">Chance of Rain</div>
-                        <div class="content">10%</div>
+                        <div class="content">{{current.pop}}%</div>
                     </div>
                     <div class="pressure">
                         <div class="title2">Pressure</div>
@@ -284,6 +283,7 @@
                 </div>
                 <div class="tide">
                     <div class="title">Wave Height</div>
+                    <div id="map"></div>
                 </div>
             </div>
         </div>
